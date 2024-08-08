@@ -1,23 +1,14 @@
 package packagetests;
 
-import dev.failsafe.internal.util.Assert;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class SauceDemoTest2 {
-    private static WebDriver driver;
+public class SauceDemoTest2 extends BaseTest {
 
-    @BeforeAll
-    public static void setup() {
-        driver = new ChromeDriver();
-        driver.get("https://www.saucedemo.com");
-    }
     @BeforeEach
     public void loginFlow() {
+        driver.get("https://www.saucedemo.com");
         WebElement username = driver.findElement(By.xpath("//input[@name='user-name']"));
         username.sendKeys("standard_user");
         WebElement password = driver.findElement(By.xpath("//input[@id='password']"));
@@ -51,11 +42,5 @@ public class SauceDemoTest2 {
         WebElement logout = driver.findElement(By.id("logout_sidebar_link"));
         Assertions.assertTrue(logout.isDisplayed(), "logout button is not displayed");
 
-    }
-    @AfterAll
-     public static void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
     }
 }
